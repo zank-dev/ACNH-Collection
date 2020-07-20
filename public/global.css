@@ -1,0 +1,16 @@
+html, body {
+   font-family: 'Nunito', sans-serif;
+}
+
+.table tbody tr.active {
+   color: #5755D9;
+}
+
+.table.table-hover tbody tr.active:hover {
+   color: #FFF;
+   background-color: #0d0d0d;
+}
+
+.progress-last-hour::-webkit-progress-value, .progress-last-hour::-moz-progress-bar {
+   background: #FFB700 !important;
+}
