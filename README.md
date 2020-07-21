@@ -36,6 +36,7 @@ And then commit and push changes to GitHub
  - [ ] add art collection
  - [ ] add fossile collection
  - [ ] calculate priority in %
+ - [ ] southern hemisphere
 
 
 # Contributing
