@@ -4,6 +4,7 @@
 
     const dispatch = createEventDispatcher();
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'];
+    const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
     export let collection, colourMode;
     let progressBars = [];
     let date = new Date();
@@ -135,34 +136,41 @@
 {#each collection as { id, name, type, location, extra, time, month, price, active, caught, icon }}
     <tr class="c-hand" on:click={() => playerCollection(id)} class:active={ isActive(month, time) === true }>
     <td>
-        <div class="popover popover-right">
-            <figure class="avatar">
-                <Image src={getImage(name, type)} alt={name} placeholder='./img/placeholder.png' />
-                <img src="./img/icons/{type}_icon.svg" class="avatar-icon" alt={type}}>
-            </figure>
-            <div class="popover-container">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-right">
-                            <figure class="avatar avatar-xl">
-                                <Image src={getImage(name, type)} alt={name} placeholder='./img/placeholder.png' />
-                            </figure>
+        {#if !isMobileDevice}
+            <div class="popover popover-right">
+                <figure class="avatar">
+                    <Image src={getImage(name, type)} alt={name} placeholder='./img/placeholder.png' />
+                    <img src="./img/icons/{type}_icon.svg" class="avatar-icon" alt={type}}>
+                </figure>
+                <div class="popover-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-right">
+                                <figure class="avatar avatar-xl">
+                                    <Image src={getImage(name, type)} alt={name} placeholder='./img/placeholder.png' />
+                                </figure>
+                            </div>
+                            <div class="card-title h5 text-dark">{name}</div>
+                            <div class="card-subtitle text-gray">{location}{#if extra !== ''}<br>({extra}){/if}</div>
                         </div>
-                        <div class="card-title h5 text-dark">{name}</div>
-                        <div class="card-subtitle text-gray">{location}{#if extra !== ''}<br>({extra}){/if}</div>
-                    </div>
-                    <div class="card-body text-dark">
-                        <div class="float-left">
-                             {setTime(time)}<br>
-                             {setMonth(month)}
-                        </div>
-                        <div class="float-right">
-                            <img src="./img/icons/{type}_icon.svg" class="avatar-icon" class:light-mode={ colourMode === 'light' } alt={type}}>
+                        <div class="card-body text-dark">
+                            <div class="float-left">
+                                {setTime(time)}<br>
+                                {setMonth(month)}
+                            </div>
+                            <div class="float-right">
+                                <img src="./img/icons/{type}_icon.svg" class="avatar-icon" class:light-mode={ colourMode === 'light' } alt={type}}>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {:else}
+            <figure class="avatar">
+                    <Image src={getImage(name, type)} alt={name} placeholder='./img/placeholder.png' />
+                    <img src="./img/icons/{type}_icon.svg" class="avatar-icon" alt={type}}>
+            </figure>
+        {/if}
     </td>
     <td>{name}{#if caught}<i class="icon icon-check float-right"></i>{/if}</td>
     {#if extra !== ''}
@@ -171,24 +179,32 @@
         <td>{location}</td>
     {/if}
     <td>
-        <div class="popover popover-top">
+        {#if !isMobileDevice}
+            <div class="popover popover-top">
+                {#if calcTimeValue(time) >= 0}
+                    <progress class="progress" id={setID(name)} class:progress-colour={active === false}></progress>
+                {:else}
+                    <progress class="progress" id={setID(name)}></progress>
+                {/if}
+                <div class="popover-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title h5 text-dark">Time</div>
+                            <div class="card-subtitle text-gray">{name}</div>
+                        </div>
+                        <div class="card-body text-dark">
+                            <div >{setTime(time)}<i class="float-right icon icon-2x icon-time" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {:else}
             {#if calcTimeValue(time) >= 0}
                 <progress class="progress" id={setID(name)} class:progress-colour={active === false}></progress>
             {:else}
                 <progress class="progress" id={setID(name)}></progress>
             {/if}
-            <div class="popover-container">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title h5 text-dark">Time</div>
-                        <div class="card-subtitle text-gray">{name}</div>
-                    </div>
-                    <div class="card-body text-dark">
-                        <div >{setTime(time)}<i class="float-right icon icon-2x icon-time" /></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {/if}
     </td>
     <td class="hide-xs">
         {setMonth(month)}
