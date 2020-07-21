@@ -5,6 +5,7 @@
 	
 	export let colourMode;
 	let time = new Date();
+	let navbar;
 
 	$:hours = ('0' + time.getHours()).slice(-2);
 	$:minutes = ('0' +time.getMinutes()).slice(-2);
