@@ -1,5 +1,5 @@
 # [ACNH - Collection](https://acnh-collection.com/) ![ACNH - Collection Icon](https://raw.githubusercontent.com/ZankHunt/ACNH-Collection/master/public/img/icons/icon.svg "ACNH - Collection Icon")
-This site helps you to track and finish your collection!
+This site helps you to track and finish your Critterpedia collection!
 
 ---
 
