@@ -27,7 +27,7 @@
 <div id="main" class="hero hero-body" class:bg-dark={ colourMode === 'light' } class:bg-gray={ colourMode === 'dark' }>
 	<main class="container grid-lg">
 		<h1>ACNH - Collection</h1>
-		<p>This site helps you to track and finish your collection!</p>
+		<p>This site helps you to track and finish your Critterpedia collection!</p>
 		<Settings on:searchEvent={searchEvent} on:swapedCaughtMode={swapedCaughtMode} />
 		<Search {colourMode} on:searchEvent={searchEvent} />
 		{#if loading === true}
