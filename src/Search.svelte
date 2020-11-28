@@ -4,16 +4,15 @@
     const dispatch = createEventDispatcher();
 
     export let colourMode;
-    let searchElement;
+    let searchValue = '';
 
     function sendSearch(){
-        const value = searchElement.value;
-        dispatch('searchEvent', value);
+        dispatch('searchEvent', searchValue);
     }
 
     function resetInput(){
         dispatch('searchEvent', '');
-        searchElement.value = '';
+        searchValue = '';
     }
 
     function handleKeydown(event)
@@ -22,14 +21,10 @@
             resetInput();
         }
     }
-
-    onMount(() => {
-        searchElement = document.getElementById('search');
-    });
 </script>
 
 <div class="has-icon-left input-group">
-    <input on:keydown={handleKeydown} on:input={sendSearch} id="search" type="text" class="form-input" placeholder="Search">
+    <input on:keydown={handleKeydown} on:input={sendSearch} bind:value={searchValue} type="text" class="form-input" placeholder="Search">
     <i class="form-icon icon icon-search" class:text-dark={ colourMode === 'light' }></i>
     <button on:click={resetInput} class="btn btn-primary input-group-btn">Reset</button>
 </div>

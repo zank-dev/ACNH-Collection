@@ -3,7 +3,7 @@
     import Image from './Image.svelte';
 
     const dispatch = createEventDispatcher();
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'];
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
     export let collection, colourMode;
     let progressBars = [];
